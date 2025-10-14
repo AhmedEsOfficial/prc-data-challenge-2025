@@ -1,0 +1,107 @@
+
+PHASE 1 DATA UNDERSTANDING - KEY FINDINGS
+==========================================
+
+1. DATASET OVERVIEW
+-------------------
+- Training: 131,530 fuel intervals across 11,037 flights
+- Ranking: 24,289 intervals across 1,888 flights
+- Date coverage: 2025-04-12 00:00:00 to 2025-08-31 00:00:00
+- Aircraft types: 26 unique types
+
+2. FUEL CONSUMPTION PATTERNS
+-----------------------------
+- Mean fuel per interval: 557.71 kg
+- Std deviation: 883.56 kg
+- Range: 0.45 - 32205.03 kg
+- Distribution: Right-skewed with long tail (some very high consumption intervals)
+
+- Interval duration: 532s avg (range: 2-3600s)
+- Fuel rate: 0.93 kg/s avg
+
+- Aircraft variation: Large differences by type (e.g., wide-body vs narrow-body)
+  * Top consumer: B77L (6111.8 kg/interval)
+  * Lowest consumer: B38M (78.2 kg/interval)
+
+- Position in flight: Early intervals (takeoff/climb) have higher fuel consumption
+  * 0-10% position: 587.1 kg
+  * 25-50% position: 543.7 kg
+  * 90-100% position: 541.3 kg
+
+3. TRAJECTORY DATA QUALITY
+---------------------------
+- Average points per flight: 15383
+- Average time between points: 2.8 seconds
+- Data sources: 99.9% ADS-B, 0.1% ACARS
+
+- Missing data rates:
+  * Groundspeed: 24.7%
+  * Track: 24.7%
+  * Vertical rate: 24.7%
+  * Mach: 100.0% (essentially unusable)
+
+4. INTERVAL-TRAJECTORY MAPPING
+-------------------------------
+- Average points per interval: 687.4
+- Intervals with NO data: 0.0%
+- Data coverage is generally good but some gaps exist
+
+5. FLIGHT PHASES
+----------------
+- Successfully identified phases from altitude/vertical rate profiles
+- Typical progression: ground → takeoff → climb → cruise → descent → landing
+- Cruise typically at 30,000-36,000 ft with stable altitude
+- Climb/descent phases show high vertical rates (±1000-3000 ft/min)
+
+6. FEATURE-FUEL CORRELATIONS
+-----------------------------
+Top correlations with fuel consumption:
+fuel_kg               1.000000
+interval_duration     0.985704
+point_count           0.506294
+altitude_delta        0.277726
+groundspeed_mean      0.198120
+vertical_rate_mean    0.107491
+altitude_mean         0.085972
+altitude_min          0.084078
+groundspeed_max       0.063796
+altitude_max          0.041635
+
+- Interval duration: Strong positive correlation
+- Altitude delta: Climbing (positive delta) correlates with higher fuel
+- Vertical rate: High climb/descent rates indicate more fuel usage
+- Groundspeed: Moderate positive correlation
+
+7. DATA QUALITY RECOMMENDATIONS
+--------------------------------
+✓ Use interval_duration as primary feature (varies significantly)
+✓ Create robust aggregations that handle missing groundspeed/track/vertical_rate
+✓ Ignore Mach, TAS, CAS fields (>99% missing)
+✓ Use flight phase as categorical feature
+✓ Handle intervals with no trajectory data (forward-fill or interpolate)
+✓ Aircraft type is crucial predictor (high variability)
+
+8. MODELING STRATEGY INSIGHTS
+------------------------------
+- Target variable (fuel_kg) has high variance → RMSE metric is appropriate
+- Features should include:
+  * Interval duration and position in flight
+  * Altitude profile (mean, delta, std)
+  * Vertical rate statistics
+  * Aircraft type (categorical)
+  * Flight phase detection
+  * Origin/destination elevation difference
+
+- Challenges:
+  * Missing trajectory data for some intervals
+  * Variable interval durations (not uniform)
+  * High variance in fuel consumption (0.45 - 32,205 kg)
+  * Need to generalize from April-Aug to September
+
+NEXT STEPS FOR PHASE 2
+-----------------------
+1. Implement batch feature extraction pipeline
+2. Create robust missing value handling
+3. Engineer physics-based features (climb work, phase transitions)
+4. Add airport elevation features
+5. Create temporal features (time of day, day of week)

@@ -1,0 +1,85 @@
+
+PHASE 2 FEATURE ENGINEERING - SUMMARY REPORT
+============================================
+
+PROCESSING STATISTICS
+---------------------
+- Total flights processed: 11,037
+- Failed flights: 0
+- Total fuel intervals processed: 131,530
+- Final feature dataset rows: 131,530
+- Total features extracted: 79 (excluding idx, flight_id, fuel_kg)
+
+FEATURE BREAKDOWN BY CATEGORY
+------------------------------
+category
+Flight-level       13
+Interval-based     11
+Other              14
+Physics-derived     4
+Trajectory         37
+
+TOP 20 MOST CORRELATED FEATURES WITH FUEL
+------------------------------------------
+distance_covered_km          0.796389
+interval_duration_min        0.789419
+interval_duration_sec        0.789419
+great_circle_distance_km     0.515956
+flight_duration_hours        0.498723
+flight_duration_min          0.498723
+seconds_to_landing           0.396864
+groundspeed_missing_pct      0.308107
+vertical_rate_missing_pct    0.308107
+seconds_from_takeoff         0.301085
+dest_lon                     0.287012
+origin_lon                   0.265707
+altitude_max                 0.204665
+altitude_p75                 0.199582
+groundspeed_max              0.197226
+altitude_median              0.192222
+altitude_mean                0.190530
+altitude_p25                 0.181368
+groundspeed_median           0.176774
+groundspeed_mean             0.171944
+
+DATA QUALITY
+------------
+- Missing value rate: 6.19%
+- Columns with >10% missing: 13
+
+KEY INSIGHTS
+------------
+1. interval_duration_sec remains the strongest predictor (correlation: 0.7894)
+2. Trajectory features (altitude_delta, distance_covered_km) show strong correlation
+3. Flight position features (interval_position_pct, seconds_from_takeoff) are significant
+4. Physics-derived features (climb_work) capture energy dynamics
+5. Categorical features (aircraft_type, flight_phase) will be crucial for model
+
+OUTPUTS GENERATED
+-----------------
+1. Main dataset: ./cache/train_features_complete.parquet
+   - Size: 128.64 MB
+   - Format: Parquet (compressed)
+
+2. Feature catalog: ./reports/phase2_feature_catalog.csv
+   - Complete metadata for all 79 features
+   - Includes category, dtype, missing %, correlation
+
+3. Correlation report: ./reports/phase2_feature_correlations.csv
+   - All feature correlations with fuel_kg
+   - Sorted by absolute correlation value
+
+READY FOR PHASE 3: DATA PREPARATION
+------------------------------------
+Next steps:
+1. Load train_features_complete.parquet
+2. Handle missing values (imputation strategy)
+3. Encode categorical features (one-hot or target encoding)
+4. Create train/validation temporal split (April-July / August)
+5. Normalize/scale features if needed
+6. Ready for model training!
+
+COMPLETION TIME
+---------------
+Started: 2025-10-15 02:07:50.005132
+Duration: [Calculate manually]

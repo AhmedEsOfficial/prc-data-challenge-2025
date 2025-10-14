@@ -1,0 +1,27 @@
+3  Submission
+We provide a submission file for each phase of the Challenge, fuel_rank_submission.parquet for phase 1 and fuel_final_submission.parquet for phase 2.
+
+For phase 1 there are companion trajectories and flight list.
+
+Each team will have to submit its predictions in its own bucket, with a file name template as follows
+
+<team-name>_v<incremental integer>.parquet
+
+The fuel_rank_submission.parquet (fuel_final_submission.parquet) payload looks something like
+
+idx     flight_id                start                  end  fuel_kg
+  0  prc770822360  2025-04-13 04:31:04  2025-04-13 05:01:04      0.0
+  1  prc770822360  2025-04-13 05:01:04  2025-04-13 05:16:04      0.0
+  2  prc770822360  2025-04-13 05:16:04  2025-04-13 05:46:04      0.0
+  3  prc770822360  2025-04-13 05:46:04  2025-04-13 06:01:04      0.0
+...
+Submission format
+You should submit a parquet file, named <team-name>_v<incremental integer>.parquet, with your predictions with exactly all entries as in in fuel_rank_submission.parquet (fuel_final_submission.parquet), i.e. something with a payload like:
+
+idx     flight_id                start                  end  fuel_kg
+  0  prc770822360  2025-04-13 04:31:04  2025-04-13 05:01:04    250.3 
+  1  prc770822360  2025-04-13 05:01:04  2025-04-13 05:16:04    120.8
+  2  prc770822360  2025-04-13 05:16:04  2025-04-13 05:46:04   2500 
+  3  prc770822360  2025-04-13 05:46:04  2025-04-13 06:01:04   1300.9 
+...
+We require each row to match idx, flight_id, start and end before fuel_kg will be considered by the ranking script when calculating the RMSE. Errors will be issued in case of mismatch. Errors will also be issued in case of missing or extra rows.
