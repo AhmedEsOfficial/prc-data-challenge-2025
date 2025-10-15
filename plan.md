@@ -491,7 +491,7 @@ assert submission['idx'].to_list() == list(range(24289)), "idx column altered"
 assert submission['fuel_kg'].null_count() == 0, "Null predictions present"
 
 # Save submission
-team_name = "your_team_name"
+team_name = "gentle-orange"
 version = 1
 submission.write_parquet(f'{team_name}_v{version}.parquet')
 
