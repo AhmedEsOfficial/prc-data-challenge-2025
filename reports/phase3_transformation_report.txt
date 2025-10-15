@@ -1,0 +1,163 @@
+
+PHASE 3 DATA PREPARATION - TRANSFORMATION REPORT
+=================================================
+
+EXECUTION SUMMARY
+-----------------
+Started: 2025-10-15 03:24:10.700084
+Status: SUCCESS
+
+INPUT DATA
+----------
+Source: ./cache/train_features_complete.parquet
+Initial shape: (131530, 82)
+Initial features: 79
+
+STEP 1: DATA CLEANING
+----------------------
+Features removed: 2
+  - Constant features: 0
+    []
+  - Duplicate features: 2
+    ['interval_duration_sec', 'flight_duration_hours']
+
+Features after cleaning: 77
+
+STEP 2: TEMPORAL SPLIT
+-----------------------
+Split criterion: start_month < 8 (train), start_month == 8 (val)
+
+Train set:
+  Samples: 121,576
+  Percentage: 92.4%
+
+Validation set:
+  Samples: 9,858
+  Percentage: 7.5%
+
+Leakage check: PASSED ✓
+
+STEP 3: MISSING VALUE HANDLING
+-------------------------------
+Strategy: Missing indicators + median imputation by aircraft type
+
+Missing value indicators created: 13
+
+Top features with missing values:
+0       altitude_mean
+1        altitude_std
+2        altitude_min
+3        altitude_max
+4      altitude_range
+5     altitude_median
+6        altitude_p25
+7        altitude_p75
+8    groundspeed_mean
+9     groundspeed_std
+
+Imputation method:
+  - Aircraft-specific median: Yes
+  - Global median fallback: Yes
+
+Final missing values:
+  Train: 0
+  Val: 0
+
+STEP 4: CATEGORICAL ENCODING
+-----------------------------
+Target encoding (mean target by category):
+  - aircraft_type (26 categories)
+
+Frequency encoding (proportion of occurrences):
+  - origin_icao (266 categories)
+  - destination_icao (256 categories)
+
+One-hot encoding:
+  - detected_flight_phase (7 categories)
+  - altitude_band (7 categories)
+  - time_of_day (4 categories)
+  - flight_phase_position (6 categories)
+
+Features after encoding: 110
+
+STEP 5: FEATURE SCALING
+------------------------
+Scaling method: StandardScaler (mean=0, std=1)
+
+Features scaled: 72
+Binary features excluded: 37
+
+FINAL DATASET
+-------------
+Training set:
+  X_train: (121576, 110)
+  y_train: (121576,)
+  Memory: 102.15 MB
+
+Validation set:
+  X_val: (9858, 110)
+  y_val: (9858,)
+  Memory: 8.28 MB
+
+Feature summary:
+  Total features: 110
+  Numeric features: 109
+  Feature names saved: 110
+
+TARGET DISTRIBUTION
+-------------------
+Training:
+  Mean: 570.37 kg
+  Std: 893.22 kg
+  Min: 0.45 kg
+  Max: 32205.03 kg
+  Median: 213.64 kg
+
+Validation:
+  Mean: 404.42 kg
+  Std: 740.03 kg
+  Min: 1.00 kg
+  Max: 14300.00 kg
+  Median: 181.44 kg
+
+Distribution comparison:
+  Mean ratio (val/train): 0.709
+  Std ratio (val/train): 0.829
+
+QUALITY CHECKS
+--------------
+✓ No missing values in final datasets
+✓ No infinite values in final datasets
+✓ No data leakage between train and val
+✓ Consistent feature columns in train and val
+✓ All preprocessing transformations saved
+
+OUTPUT FILES
+------------
+Training data:
+  - ./cache/X_train.parquet
+  - ./cache/y_train.parquet
+  - ./cache/train_ids.parquet
+
+Validation data:
+  - ./cache/X_val.parquet
+  - ./cache/y_val.parquet
+  - ./cache/val_ids.parquet
+
+Preprocessing artifacts:
+  - ./models/preprocessing_pipeline.pkl
+  - ./models/feature_names.json
+
+NEXT STEPS: PHASE 4 - MODEL TRAINING
+-------------------------------------
+1. Load X_train.parquet and y_train.parquet
+2. Train baseline models (Linear, Random Forest)
+3. Train primary model (LightGBM)
+4. Evaluate on X_val.parquet and y_val.parquet
+5. Track experiments and hyperparameters
+6. Select best model for Phase 5 optimization
+
+READY FOR MODEL TRAINING!
+==========================
+All data preprocessing complete.
+Datasets are clean, encoded, scaled, and ready for training.
