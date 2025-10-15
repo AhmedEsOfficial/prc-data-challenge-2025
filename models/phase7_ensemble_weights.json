@@ -1,0 +1,23 @@
+{
+  "weights_by_stage": {
+    "low": {
+      "lightgbm": 0.55,
+      "catboost": 0.44999999999999996,
+      "rmse": 45.31203742569396
+    },
+    "medium": {
+      "lightgbm": 0.9,
+      "catboost": 0.09999999999999998,
+      "rmse": 136.12201222771876
+    },
+    "high": {
+      "lightgbm": 0.5,
+      "catboost": 0.5,
+      "rmse": 552.710720060951
+    }
+  },
+  "thresholds": [
+    500,
+    1500
+  ]
+}

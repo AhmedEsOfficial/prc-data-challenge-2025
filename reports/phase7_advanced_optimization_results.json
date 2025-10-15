@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-10-15T16:52:28.746263",
+  "phase6_baseline": 163.04,
+  "phase7_3stage_baseline": 151.84,
+  "phase7_3stage_optimized": {
+    "rmse": 150.61341511701386,
+    "mae": 50.14914776912382,
+    "r2": 0.9585743020260553,
+    "per_stage": {
+      "low": 45.554454411471724,
+      "medium": 132.90563939145605,
+      "high": 548.571678874806
+    }
+  },
+  "optuna_best_params": {
+    "medium": {
+      "num_leaves": 45,
+      "learning_rate": 0.043517641665519594,
+      "max_depth": 9,
+      "min_child_samples": 62,
+      "feature_fraction": 0.7122609443017626,
+      "bagging_fraction": 0.8142425629989439,
+      "bagging_freq": 2,
+      "reg_alpha": 0.3963157562398988,
+      "reg_lambda": 0.34694020671138515
+    },
+    "high": {
+      "num_leaves": 47,
+      "learning_rate": 0.03146165892774848,
+      "max_depth": 8,
+      "min_child_samples": 31,
+      "feature_fraction": 0.8289923676749066,
+      "bagging_fraction": 0.8958437665389886,
+      "bagging_freq": 4,
+      "reg_alpha": 0.39915143339006115,
+      "reg_lambda": 0.08821720616836747
+    }
+  },
+  "total_improvement_kg": 12.426584882986134,
+  "total_improvement_pct": 7.621801326659798,
+  "gap_to_target": 100.61341511701386
+}

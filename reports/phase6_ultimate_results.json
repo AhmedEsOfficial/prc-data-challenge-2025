@@ -1,0 +1,32 @@
+{
+  "best_model": "CatBoost",
+  "best_rmse": 468.88385958553584,
+  "improvement_from_baseline": -147.7066192538094,
+  "all_results": [
+    {
+      "model": "LightGBM",
+      "rmse": 578.1880551237454,
+      "improvement_pct": -205.45092457274308,
+      "improvement_kg": -388.8980551237454
+    },
+    {
+      "model": "CatBoost",
+      "rmse": 468.88385958553584,
+      "improvement_pct": -147.7066192538094,
+      "improvement_kg": -279.5938595855358
+    },
+    {
+      "model": "NeuralNetwork",
+      "rmse": 601.656689742713,
+      "improvement_pct": -217.84916780744518,
+      "improvement_kg": -412.366689742713
+    },
+    {
+      "model": "Stacking",
+      "rmse": 532.4449990195214,
+      "improvement_pct": -181.28532887079166,
+      "improvement_kg": -343.1549990195215
+    }
+  ],
+  "timestamp": "2025-10-15T15:29:10.151352"
+}

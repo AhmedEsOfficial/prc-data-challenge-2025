@@ -1,0 +1,90 @@
+================================================================================
+PHASE 7: FINAL COMPREHENSIVE SOLUTION
+================================================================================
+Start Time: 2025-10-15 16:54:45.538894
+
+Loading data...
+✓ Train: (121576, 145)
+✓ Val: (9858, 145)
+
+================================================================================
+APPROACH 1: ULTRA-GRANULAR 6-STAGE STRATIFICATION
+================================================================================
+6-Stage thresholds:
+  very_low        (    0-  200 kg): Train=47,615, Val=5,096
+  low             (  200-  500 kg): Train=38,612, Val=2,959
+  medium          (  500- 1000 kg): Train=15,153, Val= 767
+  medium_high     ( 1000- 1500 kg): Train= 8,240, Val= 418
+  high            ( 1500- 2500 kg): Train= 6,631, Val= 384
+  very_high       ( 2500-100000 kg): Train= 5,325, Val= 234
+
+Training MEDIUM model (500-1000 kg)...
+  Samples: Train=15,153, Val=767
+  Val RMSE: 90.67 kg
+
+Training MEDIUM_HIGH model (1000-1500 kg)...
+  Samples: Train=8,240, Val=418
+  Val RMSE: 89.61 kg
+
+================================================================================
+APPROACH 2: LOG-TRANSFORM FOR HIGH FUEL RANGES
+================================================================================
+
+Training HIGH model (1500-2500 kg) with log-transform...
+  Samples: Train=6,631, Val=384
+  Val RMSE: 140.39 kg
+
+Training VERY_HIGH model (2500+ kg) with log-transform...
+  Samples: Train=5,325, Val=234
+  Val RMSE: 861.08 kg
+
+================================================================================
+APPROACH 3: CATBOOST FOR HIGH RANGES
+================================================================================
+
+Training HIGH model (1500-2500 kg) with CatBoost...
+  Val RMSE: 134.38 kg
+
+Training VERY_HIGH model (2500+ kg) with CatBoost...
+  Val RMSE: 903.53 kg
+
+================================================================================
+FINAL ENSEMBLE: OPTIMAL ROUTING AND AVERAGING
+================================================================================
+
+6-Stage Approaches:
+  LightGBM:      145.06 kg
+  Log-Transform: 145.06 kg
+  CatBoost:      150.86 kg
+
+Finding optimal ensemble weights...
+
+✓ FINAL ENSEMBLE:
+  Weights: LGB=0.30, Log=0.40, Cat=0.30
+  RMSE: 144.19 kg
+  MAE: 44.73 kg
+  R²: 0.9620
+
+================================================================================
+PHASE 7: COMPREHENSIVE SOLUTION - FINAL SUMMARY
+================================================================================
+
+Model                          RMSE         Improvement     Gap to Target
+--------------------------------------------------------------------------------
+Phase 6 Two-Stage              163.04       0.00            113.04 kg
+Phase 7 3-Stage Baseline       151.84       11.20           101.84 kg
+Phase 7 3-Stage Optimized      150.61       12.43           100.61 kg
+Phase 7 6-Stage Final          144.19       18.85           94.19 kg
+================================================================================
+
+✓ Total improvement: 18.85 kg (11.6%)
+✓ Remaining gap to target: 94.19 kg
+
+⚠️  More work needed, but making progress
+
+✓ Results saved to phase7_final_comprehensive_results.json
+================================================================================
+
+Saving models...
+✓ All models saved!
+================================================================================

@@ -1,0 +1,111 @@
+================================================================================
+PHASE 7: ULTIMATE BREAKTHROUGH TO < 50 KG RMSE
+================================================================================
+Start Time: 2025-10-15 16:43:38.170062
+
+Loading data...
+Train shape: (121576, 145)
+Val shape: (9858, 145)
+Features: 145
+
+================================================================================
+CREATING ADVANCED SEQUENTIAL FEATURES
+================================================================================
+Adding sequential features to training set...
+Warning: Cannot create sequential features without flight_id and start time
+Adding sequential features to validation set...
+Warning: Cannot create sequential features without flight_id and start time
+
+Handling missing values from sequential features...
+Train NaNs before: 0
+Val NaNs before: 0
+Train NaNs after: 0
+Val NaNs after: 0
+
+New feature count: 145 (was 145)
+Added 0 sequential features
+
+================================================================================
+TRAINING 4-STAGE STRATIFIED MODELS
+================================================================================
+
+================================================================================
+Training VERY_LOW model (0-200 kg)
+================================================================================
+Train samples: 47,615
+Val samples: 5,096
+[100]	val's rmse: 25.8121
+[200]	val's rmse: 25.4355
+
+VERY_LOW Results:
+  Train RMSE: 24.74 kg
+  Val RMSE: 25.42 kg
+  Val MAE: 18.58 kg
+  Val R²: 0.6946
+  Best iteration: 204
+
+================================================================================
+Training LOW model (200-600 kg)
+================================================================================
+Train samples: 42,931
+Val samples: 3,186
+[100]	val's rmse: 50.3032
+[200]	val's rmse: 49.4375
+[300]	val's rmse: 49.2457
+[400]	val's rmse: 49.2085
+
+LOW Results:
+  Train RMSE: 46.06 kg
+  Val RMSE: 49.12 kg
+  Val MAE: 30.59 kg
+  Val R²: 0.7947
+  Best iteration: 379
+
+================================================================================
+Training MEDIUM model (600-1500 kg)
+================================================================================
+Train samples: 19,074
+Val samples: 958
+[100]	val's rmse: 129.431
+[200]	val's rmse: 128.157
+[300]	val's rmse: 127.702
+
+MEDIUM Results:
+  Train RMSE: 99.64 kg
+  Val RMSE: 127.17 kg
+  Val MAE: 88.81 kg
+  Val R²: 0.7982
+  Best iteration: 251
+
+================================================================================
+Training HIGH model (1500-100000 kg)
+================================================================================
+Train samples: 11,956
+Val samples: 618
+[100]	val's rmse: 576.73
+
+HIGH Results:
+  Train RMSE: 574.14 kg
+  Val RMSE: 568.54 kg
+  Val MAE: 246.53 kg
+  Val R²: 0.8394
+  Best iteration: 75
+
+================================================================================
+4-STAGE MODEL COMPLETE - EVALUATING ON FULL VALIDATION SET
+================================================================================
+
+4-STAGE MODEL - OVERALL VALIDATION METRICS:
+  RMSE: 799.62 kg
+  MAE: 378.47 kg
+  R²: -0.1676
+
+================================================================================
+PHASE 7 - INITIAL RESULTS SAVED
+================================================================================
+4-Stage RMSE: 799.62 kg
+Baseline: 163.04 kg
+Improvement: -636.58 kg (-390.4%)
+Target: 50 kg
+Remaining gap: 749.62 kg
+================================================================================

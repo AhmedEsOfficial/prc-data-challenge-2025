@@ -1,0 +1,10 @@
+{
+  "baseline_rmse": 189.29,
+  "lightgbm_rmse": 578.1880551237454,
+  "catboost_rmse": 526.9641945834001,
+  "ensemble_rmse": 536.934010956112,
+  "best_model": "CatBoost",
+  "best_rmse": 526.9641945834001,
+  "improvement_pct": -178.38987510349205,
+  "timestamp": "2025-10-15T15:14:33.564189"
+}

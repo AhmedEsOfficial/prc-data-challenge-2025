@@ -1,0 +1,161 @@
+{
+  "error_results": "{'fuel_magnitude':           abs_residual                         rel_error        actual_fuel\n                 count    mean     std  median      mean median        mean\nfuel_bin                                                                   \n<100              3886   34.53   56.98   18.21     84.81  28.50       69.12\n100-200           2476   39.68   60.25   19.65     23.90  11.04      176.93\n200-500           1792   71.75  107.98   52.66     22.13  16.07      344.19\n500-1000           696  155.67  164.44  112.54     21.49  15.42      733.66\n1000-2000          700  160.36  167.75  112.89     11.16   7.43     1476.93\n>2000              308  356.80  766.67  201.78      9.18   6.09     3632.41, 'position':              abs_residual                rel_error\n                    count   mean     std      mean\nposition_bin                                      \n0-20%                5273  65.72  191.29     44.11, 'aircraft':              abs_residual                 rel_error actual_fuel\n                    count    mean     std      mean        mean\naircraft_bin                                                   \n0                    4043   42.95   62.89     53.71      127.10\n1                    3324   52.33  107.25     35.89      279.70\n2                     663   99.94  156.44    100.02      451.68\n3                    1828  151.89  345.00     28.03     1227.40, 'duration':              abs_residual                 rel_error actual_fuel\n                    count    mean     std      mean        mean\nduration_bin                                                   \n<5min                1776  169.00  357.93     27.94     1342.01\n5-10min                37  380.51  316.96     46.88     3657.06\n10-15min                0     NaN     NaN       NaN         NaN\n15-20min                0     NaN     NaN       NaN         NaN\n>20min                  0     NaN     NaN       NaN         NaN, 'high_error_threshold': np.float64(537.8385867584278), 'high_error_count': 99}",
+  "patterns": {
+    "overall_bias": -3.560192827195066,
+    "fuel_bias": {
+      "<100": -31.49,
+      "100-200": 3.67,
+      "200-500": -11.1,
+      "500-1000": 16.14,
+      "1000-2000": 45.41,
+      ">2000": 178.77
+    },
+    "heteroscedasticity_ratio": 21.136574650251838,
+    "feature_correlations": {
+      "interval_duration_min": 0.3119783034617628,
+      "distance_covered_km": 0.2685080465597406,
+      "altitude_mean": 0.0007359638620986093,
+      "groundspeed_mean": 0.021188729014114522,
+      "vertical_rate_mean": 0.07393915403485965
+    },
+    "normality_test": {
+      "shapiro_p": 1.3688382174774206e-86,
+      "skewness": 20.878757640948685,
+      "kurtosis": 1166.7279141772044
+    }
+  },
+  "gaps": {
+    "interaction_count": 0,
+    "rolling_count": 0,
+    "physics_count": 2,
+    "aircraft_count": 1,
+    "error_correlations": [
+      {
+        "feature": "aircraft_type_target_enc",
+        "abs_corr": 0.3147162444728997,
+        "corr": 0.3147162444728997
+      },
+      {
+        "feature": "interval_duration_min",
+        "abs_corr": 0.3119783034617628,
+        "corr": 0.3119783034617628
+      },
+      {
+        "feature": "distance_covered_km",
+        "abs_corr": 0.2685080465597406,
+        "corr": 0.2685080465597406
+      },
+      {
+        "feature": "great_circle_distance_km",
+        "abs_corr": 0.16578316396671294,
+        "corr": 0.16578316396671294
+      },
+      {
+        "feature": "flight_duration_min",
+        "abs_corr": 0.16404039216478736,
+        "corr": 0.16404039216478736
+      },
+      {
+        "feature": "interval_position_pct",
+        "abs_corr": 0.14589907332430305,
+        "corr": -0.14589907332430305
+      },
+      {
+        "feature": "seconds_to_landing",
+        "abs_corr": 0.13456727678586392,
+        "corr": 0.13456727678586392
+      },
+      {
+        "feature": "origin_lon",
+        "abs_corr": 0.11344235479486842,
+        "corr": 0.11344235479486842
+      },
+      {
+        "feature": "distance_per_alt_change",
+        "abs_corr": 0.11312557886272348,
+        "corr": 0.11312557886272348
+      },
+      {
+        "feature": "traj_point_count",
+        "abs_corr": 0.11192150615079746,
+        "corr": 0.11192150615079746
+      },
+      {
+        "feature": "dest_lon",
+        "abs_corr": 0.1094744464546421,
+        "corr": 0.1094744464546421
+      },
+      {
+        "feature": "altitude_std",
+        "abs_corr": 0.10613457019154086,
+        "corr": 0.10613457019154086
+      },
+      {
+        "feature": "flight_phase_position_early",
+        "abs_corr": 0.10279439014593411,
+        "corr": 0.10279439014593411
+      },
+      {
+        "feature": "groundspeed_min_is_missing",
+        "abs_corr": 0.0959369058413693,
+        "corr": 0.0959369058413693
+      },
+      {
+        "feature": "groundspeed_max_is_missing",
+        "abs_corr": 0.0959369058413693,
+        "corr": 0.0959369058413693
+      }
+    ]
+  },
+  "insights": [
+    {
+      "priority": "HIGH",
+      "category": "Stratified Modeling",
+      "finding": "Highest errors in >2000 kg fuel range",
+      "action": "Train separate model for >2000 kg intervals",
+      "expected_improvement": "15-25%"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Feature Engineering",
+      "finding": "Only few interaction features present",
+      "action": "Add critical interactions: distance\u00d7speed, altitude\u00d7vertical_rate, duration\u00d7aircraft_type",
+      "expected_improvement": "15-30%"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Feature Engineering",
+      "finding": "Missing temporal/rolling features",
+      "action": "Add rolling averages, lag features, and cumulative metrics",
+      "expected_improvement": "10-15%"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Feature Engineering",
+      "finding": "Limited physics-derived features",
+      "action": "Add energy-based features (kinetic, potential, work)",
+      "expected_improvement": "10-20%"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Modeling",
+      "finding": "Significant heteroscedasticity detected",
+      "action": "Use quantile regression or log-transform target",
+      "expected_improvement": "8-15%"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Advanced Modeling",
+      "finding": "Tree models may miss complex non-linear patterns",
+      "action": "Train deep neural network (MLP) with all features + interactions",
+      "expected_improvement": "20-35%"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Ensemble",
+      "finding": "Simple weighted average may be suboptimal",
+      "action": "Use stacking with meta-learner to optimally combine models",
+      "expected_improvement": "5-15%"
+    }
+  ]
+}

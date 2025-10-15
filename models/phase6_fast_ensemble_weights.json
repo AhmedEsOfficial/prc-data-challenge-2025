@@ -1,0 +1,7 @@
+{
+  "weights": {
+    "LightGBM": 0.3,
+    "CatBoost": 0.7
+  },
+  "rmse": 536.934010956112
+}

@@ -1,0 +1,46 @@
+================================================================================
+PHASE 6: ADVANCED FEATURE ENGINEERING - SUMMARY
+================================================================================
+Generated: 2025-10-15 15:02:50
+
+FEATURE COUNTS:
+  Original features:  107
+  New features:       48
+  Total features:     155
+  Increase:           +44.9%
+
+FEATURE CATEGORIES:
+  Interaction features:  14
+  Physics features:      6
+  Aircraft features:     10
+  Temporal features:     13
+  Other features:        5
+
+TOP 20 NEW FEATURES:
+   1. distance_speed_interaction
+   2. distance_per_speed
+   3. climb_energy_proxy
+   4. altitude_vr_interaction
+   5. duration_distance_ratio
+   6. distance_per_minute
+   7. aircraft_duration_interaction
+   8. aircraft_distance_interaction
+   9. speed_altitude_interaction
+  10. speed_squared
+  11. distance_altitude_interaction
+  12. position_duration_interaction
+  13. distance_speed_altitude
+  14. path_efficiency
+  15. target_fuel_per_min
+  16. target_fuel_per_km
+  17. distance_from_start
+  18. distance_from_end
+  19. interval_duration_min_log
+  20. interval_duration_min_sqrt
+
+================================================================================
+NEXT STEPS:
+1. Train models with enhanced features
+2. Compare performance vs baseline (189.29 kg RMSE)
+3. Expected improvement: 30-50%
+================================================================================

@@ -1,0 +1,12 @@
+{
+  "baseline_rmse": 189.29,
+  "lightgbm_rmse": 196.67377155585007,
+  "catboost_rmse": 194.53988866241647,
+  "ensemble_rmse": 192.75836961383862,
+  "best_model": "Ensemble",
+  "best_rmse": 192.75836961383862,
+  "improvement_pct": -1.8323047249398448,
+  "features_used": 145,
+  "leakage_features_removed": 10,
+  "timestamp": "2025-10-15T15:16:18.836276"
+}

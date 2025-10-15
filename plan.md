@@ -711,7 +711,7 @@ def train_final_model(X_train, y_train, X_val, y_val, params):
 ## Success Criteria
 
 ### Model Quality
-- ✅ Validation RMSE < 400 kg (< 72% of fuel std)
+- ✅ Validation RMSE < 50 kg (< 72% of fuel std)
 - ✅ Cross-validation std < 50 kg (stable across folds)
 - ✅ Feature importance aligns with aviation physics (altitude, speed, phase)
 - ✅ No data leakage detected (future information in features)
@@ -727,7 +727,7 @@ def train_final_model(X_train, y_train, X_val, y_val, params):
 - ✅ Peak memory usage < 8 GB
 
 ### Deliverables
-- ✅ Submission file: `<team-name>_v1.parquet` with exact format match
+- ✅ Submission file: `gentle-orange_v1.parquet` with exact format match
 - ✅ Documentation: README with model description, features, training procedure
 - ✅ Code: Reproducible training script with random seeds
 - ✅ Validation report: Performance metrics, error analysis

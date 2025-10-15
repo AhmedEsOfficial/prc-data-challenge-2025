@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-10-15T16:55:15.311928",
+  "final_rmse": 144.19153790658152,
+  "final_mae": 44.73328235609893,
+  "final_r2": 0.9620316197726433,
+  "ensemble_weights": {
+    "lightgbm": 0.3,
+    "log_transform": 0.4,
+    "catboost": 0.29999999999999993
+  },
+  "approach_rmse": {
+    "lightgbm_6stage": 145.0638174693226,
+    "log_transform_6stage": 145.0638174693226,
+    "catboost_6stage": 150.85605004272378
+  },
+  "total_improvement_kg": 18.848462093418476,
+  "total_improvement_pct": 11.560636710879832,
+  "remaining_gap": 94.19153790658152
+}

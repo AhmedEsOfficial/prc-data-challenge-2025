@@ -1,0 +1,175 @@
+================================================================================
+PHASE 7: BREAKTHROUGH TO <50 KG RMSE - V2
+================================================================================
+Start Time: 2025-10-15 16:45:53.920486
+
+Loading data...
+✓ Train: (121576, 145), y range: [0.45, 32205.03]
+✓ Val: (9858, 145), y range: [1.00, 14300.00]
+
+================================================================================
+STRATEGY 1: OPTIMIZED 3-STAGE STRATIFICATION
+================================================================================
+
+Fuel distribution percentiles:
+  25th: 100.00 kg
+  50th: 213.64 kg
+  75th: 600.00 kg
+  90th: 1496.85 kg
+  95th: 2200.00 kg
+
+3-Stage thresholds: [500, 1500]
+
+--------------------------------------------------------------------------------
+Training LOW model (0-500 kg)
+--------------------------------------------------------------------------------
+Train samples: 86,227
+Val samples: 8,055
+Fuel range: [0.45, 500.00]
+[200]	valid_0's rmse: 46.6335
+[400]	valid_0's rmse: 46.0423
+[600]	valid_0's rmse: 45.8837
+[800]	valid_0's rmse: 45.6478
+[1000]	valid_0's rmse: 45.5955
+
+Results:
+  Train RMSE: 41.48 kg
+  Val RMSE: 45.55 kg
+  Val MAE: 30.01 kg
+  Val R²: 0.8348
+  Best iteration: 940
+
+--------------------------------------------------------------------------------
+Training MEDIUM model (500-1500 kg)
+--------------------------------------------------------------------------------
+Train samples: 23,393
+Val samples: 1,185
+Fuel range: [500.00, 1500.00]
+[200]	valid_0's rmse: 137.077
+
+Results:
+  Train RMSE: 102.72 kg
+  Val RMSE: 136.17 kg
+  Val MAE: 93.65 kg
+  Val R²: 0.8103
+  Best iteration: 273
+
+--------------------------------------------------------------------------------
+Training HIGH model (1500-100000 kg)
+--------------------------------------------------------------------------------
+Train samples: 11,956
+Val samples: 618
+Fuel range: [1500.00, 32205.03]
+
+Results:
+  Train RMSE: 577.96 kg
+  Val RMSE: 562.87 kg
+  Val MAE: 245.65 kg
+  Val R²: 0.8425
+  Best iteration: 65
+
+================================================================================
+3-STAGE MODEL - FULL VALIDATION EVALUATION
+================================================================================
+
+3-Stage Overall:
+  RMSE: 154.23 kg
+  MAE: 51.18 kg
+  R²: 0.9566
+  vs Baseline: +8.81 kg (+5.4%)
+
+================================================================================
+STRATEGY 2: 3-STAGE CATBOOST MODELS
+================================================================================
+
+--------------------------------------------------------------------------------
+Training CatBoost LOW model
+--------------------------------------------------------------------------------
+0:	learn: 122.1272298	test: 111.0488664	best: 111.0488664 (0)	total: 58.2ms	remaining: 1m 27s
+200:	learn: 53.4548295	test: 48.4632648	best: 48.4632648 (200)	total: 971ms	remaining: 6.27s
+400:	learn: 51.0506678	test: 47.0195651	best: 47.0188394 (398)	total: 1.85s	remaining: 5.07s
+600:	learn: 49.6695052	test: 46.4417824	best: 46.4417824 (600)	total: 2.68s	remaining: 4.01s
+800:	learn: 48.6186834	test: 46.1493281	best: 46.1493281 (800)	total: 3.56s	remaining: 3.11s
+1000:	learn: 47.7739438	test: 45.8898858	best: 45.8832489 (978)	total: 4.41s	remaining: 2.2s
+1200:	learn: 47.0715554	test: 45.7728238	best: 45.7444238 (1151)	total: 5.26s	remaining: 1.31s
+Stopped by overfitting detector  (100 iterations wait)
+
+bestTest = 45.74442381
+bestIteration = 1151
+
+Shrink model to first 1152 iterations.
+
+  Val RMSE: 45.74 kg
+
+--------------------------------------------------------------------------------
+Training CatBoost MEDIUM model
+--------------------------------------------------------------------------------
+0:	learn: 282.3314760	test: 303.5485498	best: 303.5485498 (0)	total: 5.48ms	remaining: 8.21s
+200:	learn: 124.8503202	test: 142.4913058	best: 142.4913058 (200)	total: 794ms	remaining: 5.13s
+400:	learn: 115.0163905	test: 140.1997629	best: 139.8652118 (360)	total: 1.51s	remaining: 4.14s
+Stopped by overfitting detector  (100 iterations wait)
+
+bestTest = 139.8652118
+bestIteration = 360
+
+Shrink model to first 361 iterations.
+
+  Val RMSE: 139.87 kg
+
+--------------------------------------------------------------------------------
+Training CatBoost HIGH model
+--------------------------------------------------------------------------------
+0:	learn: 1339.0275880	test: 1372.0344684	best: 1372.0344684 (0)	total: 6.66ms	remaining: 9.98s
+200:	learn: 510.5709227	test: 573.1482258	best: 573.1482258 (200)	total: 1.38s	remaining: 8.92s
+400:	learn: 399.3001220	test: 565.1471481	best: 564.2269117 (376)	total: 2.69s	remaining: 7.37s
+Stopped by overfitting detector  (100 iterations wait)
+
+bestTest = 564.2269117
+bestIteration = 376
+
+Shrink model to first 377 iterations.
+
+  Val RMSE: 564.23 kg
+
+================================================================================
+3-Stage CatBoost Overall:
+  RMSE: 154.98 kg
+  MAE: 51.76 kg
+  R²: 0.9561
+  vs Baseline: +8.06 kg (+4.9%)
+
+================================================================================
+STRATEGY 3: ENSEMBLE 3-STAGE MODELS
+================================================================================
+LOW: LightGBM=0.550, CatBoost=0.450, RMSE=45.31 kg
+MEDIUM: LightGBM=0.900, CatBoost=0.100, RMSE=136.12 kg
+HIGH: LightGBM=0.500, CatBoost=0.500, RMSE=552.71 kg
+
+================================================================================
+3-Stage Ensemble Overall:
+  RMSE: 151.84 kg
+  MAE: 50.46 kg
+  R²: 0.9579
+  vs Baseline: +11.20 kg (+6.9%)
+
+================================================================================
+PHASE 7: FINAL RESULTS SUMMARY
+================================================================================
+
+Model                          RMSE         vs Baseline     Gap to Target
+--------------------------------------------------------------------------------
+Phase 6 Baseline               163.04       0.00            113.04 kg
+3-Stage LightGBM               154.23       8.81            104.23 kg
+3-Stage CatBoost               154.98       8.06            104.98 kg
+3-Stage Ensemble               151.84       11.20           101.84 kg
+================================================================================
+
+✓ BEST MODEL: 3-Stage Ensemble
+  RMSE: 151.84 kg
+  Improvement from baseline: 11.20 kg (6.9%)
+  Gap to target (<50 kg): 101.84 kg (67.1%)
+
+⚠️  More optimization needed
+
+✓ Results saved to phase7_breakthrough_results.json
+================================================================================
