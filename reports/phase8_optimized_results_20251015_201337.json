@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-10-15T20:13:37.447019",
+  "overall": {
+    "rmse": 138.29529312191622,
+    "mae": 34.47732201094411,
+    "r2": 0.9650733187658235,
+    "improvement_from_phase8": 86.60470687808379,
+    "improvement_from_phase7": 5.894706878083781,
+    "gap_to_target": 78.29529312191622
+  },
+  "stages": {
+    "very_low": {
+      "rmse": 25.228338130993855,
+      "mae": 18.47495440410223,
+      "r2": 0.6992015957372966,
+      "train_samples": 47615,
+      "val_samples": 5096,
+      "range_min": 0.0,
+      "range_max": 200.0
+    },
+    "low": {
+      "rmse": 41.138931560749185,
+      "mae": 25.596756370309517,
+      "r2": 0.7914461476045265,
+      "train_samples": 38612,
+      "val_samples": 2959,
+      "range_min": 200.0,
+      "range_max": 500.0
+    },
+    "medium_low": {
+      "rmse": 58.5178942824304,
+      "mae": 46.63794527285448,
+      "r2": 0.4419739373063013,
+      "train_samples": 8779,
+      "val_samples": 472,
+      "range_min": 500.0,
+      "range_max": 750.0
+    },
+    "medium": {
+      "rmse": 52.14949209784654,
+      "mae": 43.722114176102764,
+      "r2": 0.17250977881550122,
+      "train_samples": 6374,
+      "val_samples": 295,
+      "range_min": 750.0,
+      "range_max": 1000.0
+    },
+    "medium_high": {
+      "rmse": 87.94422988902065,
+      "mae": 68.3238302750696,
+      "r2": 0.613593838445359,
+      "train_samples": 8240,
+      "val_samples": 418,
+      "range_min": 1000.0,
+      "range_max": 1500.0
+    },
+    "high": {
+      "rmse": 93.31902257697628,
+      "mae": 74.7280003490129,
+      "r2": 0.39947854457906584,
+      "train_samples": 4595,
+      "val_samples": 298,
+      "range_min": 1500.0,
+      "range_max": 2000.0
+    },
+    "high_plus": {
+      "rmse": 93.58950841561294,
+      "mae": 74.89197146883197,
+      "r2": 0.6273311831159357,
+      "train_samples": 2036,
+      "val_samples": 86,
+      "range_min": 2000.0,
+      "range_max": 2500.0
+    },
+    "very_high": {
+      "rmse": 855.5722643975276,
+      "mae": 332.5133422427098,
+      "r2": 0.6402627148788176,
+      "train_samples": 5325,
+      "val_samples": 234,
+      "range_min": 2500.0,
+      "range_max": "inf"
+    }
+  }
+}
