@@ -5,7 +5,7 @@
 ### Run Phase 3 Pipeline
 
 ```bash
-cd .
+# run from the repository root
 python notebooks/phase3_data_preparation.py
 ```
 

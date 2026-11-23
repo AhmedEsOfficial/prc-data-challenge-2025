@@ -433,7 +433,7 @@ submission.to_parquet('gentle-orange_v2.parquet', index=False)
 
 ## Comparison to Plan Expectations
 
-From plan.md, Phase 5 target performance:
+From PLAN.md, Phase 5 target performance:
 
 | Metric | Plan Target | Achieved | Status |
 |--------|-------------|----------|--------|

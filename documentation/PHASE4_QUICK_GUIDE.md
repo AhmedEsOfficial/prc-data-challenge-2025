@@ -5,7 +5,7 @@
 ### View Results
 
 ```bash
-cd .
+# run from the repository root
 cat reports/phase4_model_training_summary.txt
 ```
 

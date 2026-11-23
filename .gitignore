@@ -181,3 +181,17 @@ docker-compose.override.yml
 *.bin
 *.jsonl
 CLAUDE.md
+
+# Challenge data (downloaded with pull.py — not redistributable)
+flights_train/
+flights_rank/
+flights_final/
+submissions/
+
+# Training by-products
+catboost_info/
+
+# Credentials — use environment variables (see pull.py)
+credentials.json
+.env
+.claude/

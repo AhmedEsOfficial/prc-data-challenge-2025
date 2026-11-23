@@ -1,15 +1,38 @@
+"""Download the PRC Data Challenge 2025 datasets from the OpenSky S3 bucket.
+
+Credentials are issued to each registered team by the challenge organisers.
+Provide them through the environment — never commit them:
+
+    export OPENSKY_ACCESS_KEY=...
+    export OPENSKY_SECRET_KEY=...
+    python pull.py
+"""
+
+import os
+import sys
+
 from minio import Minio
 
-# Initialize client
-client = Minio(
-    "s3.opensky-network.org",
-    access_key="REDACTED",
-    secret_key="REDACTED",
-    secure=True
-)
+BUCKET = "prc-2025-datasets"
 
-# List and download objects
-objects = client.list_objects("prc-2025-datasets", recursive=True)
-for obj in objects:
-    print(f"Downloading: {obj.object_name}")
-    client.fget_object("prc-2025-datasets", obj.object_name, obj.object_name)
+
+def main() -> None:
+    access_key = os.environ.get("OPENSKY_ACCESS_KEY")
+    secret_key = os.environ.get("OPENSKY_SECRET_KEY")
+    if not access_key or not secret_key:
+        sys.exit("Set OPENSKY_ACCESS_KEY and OPENSKY_SECRET_KEY before running pull.py")
+
+    client = Minio(
+        os.environ.get("OPENSKY_S3_ENDPOINT", "s3.opensky-network.org"),
+        access_key=access_key,
+        secret_key=secret_key,
+        secure=True,
+    )
+
+    for obj in client.list_objects(BUCKET, recursive=True):
+        print(f"Downloading: {obj.object_name}")
+        client.fget_object(BUCKET, obj.object_name, obj.object_name)
+
+
+if __name__ == "__main__":
+    main()
